@@ -16,20 +16,30 @@ export default function Register() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
-    });
+    })
+    // console.log(JSON.stringify(formData));
+    // console.log(res);
     const data = await res.json();
     if (res.ok) {
       alert("Registration Successful! Please Login.");
       router.push('/auth/login');
-    } else {
-      alert(data.error);
+    } 
+    else {
+      // return new Response(
+      //   JSON.stringify({ error: error.message }),
+      //   { status: 500, headers: { "Content-Type": "application/json" } }
+      // );
+    
+        alert(data.error || "Registration failed.");
     }
+
+    
   };
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-96">
         <h2 className="text-2xl font-bold text-center mb-4">Register</h2>
-
+                                                      
         {["firstName", "lastName", "mobile", "email", "password"].map((field) => (
           <div key={field} className="mb-3">
             <input
